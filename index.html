@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <title>Freaky Firebase Example</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class='container'>
+        <div class='container1'>
+            <span class='text'>
+                <span>SMART ENERGY METER</span>
+            </span>
+            <span class='text3'>CONSUMER ID.</span>
+            <span class='text4'>
+                <span>harshankpatil@gmail.com</span>
+            </span>
+            <span class='text7'>= 1704$</span>
+            <span class='Text8'>amount to pay</span>
+        </div>
+        <div class='Container2'></div>
+        <div class='container3'>
+            <span class='t1'>electricity bill</span>
+            <span class='t2'>last month reading : 2003</span>
+            <span class='t3'>month reading : 5403</span>
+            <span class='t4'>total cunsumtion : 303 unit</span>
+            <span class='t5'>total cost : 700$</span>
+        </div>
+        <div class='container4'>
+            <span class='text09'><span>current</span>
+                <div class='cont' id='current'></div>
+        </div>
+        <div class='container5'>
+            <span class='tex09'><span>VOLTAGE</span>
+                <div class='cont' id='voltage'></div>
+        </div>
+        <div class='container6'>
+            <span class='tex10'><span>live LOAD (w)</span>
+                <div class='cont' id='watt'></div>
+        </div>
+        <div class='container7'>
+            <span class='tex11'><span>READING (kwh)</span>
+                <div class='cont' id='watthours'></div>
+        </div>
+        <div class='container8'>
+            <h1 class="lightStatus"></h1>
+            <button class="lightButton"><span class='text12'>click me</span></button>
+        </div>
+    </div>
+    <div class='cont3'>
+        <a href="https://docs.google.com/spreadsheets/d/1dpFNdYuocdYdH3W4D0EhqWFbj7ACTOsaroFmNwvA67Q/edit?usp=sharing" class="cart">WATCH YOUR ELECTRICITY CONSUMTION RECODE ON GOOGLE SHEET </a>
+   </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyAtktO0KVIJw_uHwkKeTuc-dqnxt5p5i1Q",
+            authDomain: "garbage-3d535.firebaseapp.com",
+            databaseURL: "https://garbage-3d535-default-rtdb.firebaseio.com",
+            projectId: "garbage-3d535",
+            storageBucket: "garbage-3d535.appspot.com",
+            messagingSenderId: "499865296233",
+        };
+        firebase.initializeApp(config);
+
+        $(document).ready(function () {
+            var database = firebase.database();
+            var current;
+            const preObject = document.getElementById('current');
+            const dbRefObject = firebase.database().ref().child('current');
+            dbRefObject.on('value', snap => {
+                console.log(snap.val());
+                preObject.innerText = JSON.stringify(snap.val(), null, 3);
+            },
+                function (error) {
+                    // The fetch failed.
+                    console.error(error);
+
+                });
+        })
+        $(document).ready(function () {
+            var database = firebase.database();
+            var voltage;
+            const preObject = document.getElementById('voltage');
+            const dbRefObject = firebase.database().ref().child('voltage');
+            dbRefObject.on('value', snap => {
+                console.log(snap.val());
+                preObject.innerText = JSON.stringify(snap.val(), null, 3);
+            },
+                function (error) {
+                    // The fetch failed.
+                    console.error(error);
+                });
+        })
+        $(document).ready(function () {
+            var database = firebase.database();
+            var watt;
+            const preObject = document.getElementById('watt');
+            const dbRefObject = firebase.database().ref().child('watt');
+            dbRefObject.on('value', snap => {
+                console.log(snap.val());
+                preObject.innerText = JSON.stringify(snap.val(), null, 3);
+            },
+                function (error) {
+                    // The fetch failed.
+                    console.error(error);
+                });
+        })
+        $(document).ready(function () {
+            var database = firebase.database();
+            var watthours;
+            const preObject = document.getElementById('watthours');
+            const dbRefObject = firebase.database().ref().child('watthours');
+            dbRefObject.on('value', snap => {
+                console.log(snap.val());
+                preObject.innerText = JSON.stringify(snap.val(), null, 3);
+            },
+                function (error) {
+                    // The fetch failed.
+                    console.error(error);
+                });
+        })
+
+        $(document).ready(function () {
+            var database = firebase.database();
+            var red;
+
+            database.ref().on("value", function (snap) {
+                red = snap.val().red;
+                if (red == 1) {
+                    $(".lightStatus").text("HOME POWER IS OFF");
+                } else {
+                    $(".lightStatus").text("HOME POWER IS ON");
+                }
+            });
+
+            $(".lightButton").click(function () {
+                var firebaseRef = firebase.database().ref().child("red");
+
+                if (red == 1) {
+                    firebaseRef.set(0);
+                    red = 0;
+                } else {
+                    firebaseRef.set(1);
+                    red = 1;
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
